@@ -53,14 +53,15 @@ public class Main {
 
 	public static void part2(){
     	Integer num = inputMaxNum();
+    	List<Integer> rule= Arrays.asList(3, 5, 7, 11, 13, 17);
 		for(int i = 1 ; i<=num; i++){
 			ArrayList<String> output = new ArrayList<String>();
-			addWordsIfDivides(i, 3, "Fizz", output, "");
-			addWordsIfDivides(i, 13, "Fezz", output, "");
-			addWordsIfDivides(i, 5, "Buzz", output, "");
-			addWordsIfDivides(i, 7, "Bang", output, "");
-			addWordsIfDivides(i, 11, "Bong", output,"Fezz");
-			reverseIfDivides(i, 17, output);
+			addWordsIfDivides(i, rule.get(0), "Fizz", output, "");
+			addWordsIfDivides(i, rule.get(4), "Fezz", output, "");
+			addWordsIfDivides(i, rule.get(1), "Buzz", output, "");
+			addWordsIfDivides(i, rule.get(2), "Bang", output, "");
+			addWordsIfDivides(i, rule.get(3), "Bong", output,"Fezz");
+			reverseIfDivides(i, rule.get(5), output);
 			printWordsOrNumber(output, i);
 		}
 	}
