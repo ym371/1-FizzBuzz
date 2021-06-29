@@ -45,9 +45,15 @@ public class Main {
 			printWordsOrNumber(output, i);
 		}
 	}
+	public static Integer inputMaxNum(){
+		System.out.println("Please key in a positive integer:");
+		Scanner sc = new Scanner(System.in);
+		return sc.nextInt();
+	}
 
 	public static void part2(){
-		for(int i = 1 ; i<=300; i++){
+    	Integer num = inputMaxNum();
+		for(int i = 1 ; i<=num; i++){
 			ArrayList<String> output = new ArrayList<String>();
 			addWordsIfDivides(i, 3, "Fizz", output, "");
 			addWordsIfDivides(i, 13, "Fezz", output, "");
