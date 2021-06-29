@@ -1,21 +1,28 @@
 package com.company;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 	    part2();
     }
     public static void addWordsIfDivides(Integer num, Integer divider, String addWord,
-										 ArrayList<String> CurrentString, String location,
-										 boolean WipeOut){
+										 ArrayList<String> CurrentString, boolean WipeOutExceptFezz){
     	if (num % divider == 0) {
-			if (WipeOut)
-				CurrentString.clear();
-			if (location.equals("right"))
-				CurrentString.add(addWord);
-			else
-				CurrentString.add(0, addWord);
+			if (WipeOutExceptFezz)
+				if (CurrentString.contains("Fezz")){
+					CurrentString.clear();
+					CurrentString.add("Fezz");
+				}
+				else
+					CurrentString.clear();
+			CurrentString.add(addWord);
+		}
+	}
+
+	public static void reverseIfDivides(Integer num, Integer divider, ArrayList<String> output){
+    	if (num % divider ==0){
+			Collections.reverse(output);
 		}
 	}
 	public static void printWordsOrNumber(ArrayList<String> output, Integer num){
@@ -24,23 +31,25 @@ public class Main {
 		else
 			System.out.println(String.join("", output));
 	}
+	
     public static void part1(){
 		for(int i = 1 ; i<=100; i++){
 			ArrayList<String> output = new ArrayList<String>();
-			addWordsIfDivides(i, 3, "Fizz", output, "right", false);
-			addWordsIfDivides(i, 5, "Buzz", output, "right", false);
+			addWordsIfDivides(i, 3, "Fizz", output, false);
+			addWordsIfDivides(i, 5, "Buzz", output, false);
 			printWordsOrNumber(output, i);
 		}
 	}
 
 	public static void part2(){
-		for(int i = 1 ; i<=200; i++){
+		for(int i = 1 ; i<=300; i++){
 			ArrayList<String> output = new ArrayList<String>();
-			addWordsIfDivides(i, 3, "Fizz", output, "right", false);
-			addWordsIfDivides(i, 5, "Buzz", output, "right", false);
-			addWordsIfDivides(i, 7, "Bang", output, "right", false);
-			addWordsIfDivides(i, 11, "Bong", output, "right", true);
-			//addWordsIfDivides(i, 13, "Bong",
+			addWordsIfDivides(i, 3, "Fizz", output, false);
+			addWordsIfDivides(i, 13, "Fezz", output, false);
+			addWordsIfDivides(i, 5, "Buzz", output,  false);
+			addWordsIfDivides(i, 7, "Bang", output, false);
+			addWordsIfDivides(i, 11, "Bong", output, true);
+			reverseIfDivides(i, 17, output);
 			printWordsOrNumber(output, i);
 		}
 	}
