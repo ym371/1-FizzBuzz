@@ -1,22 +1,27 @@
 package com.company;
 
-public class Main {
+import java.util.ArrayList;
 
+public class Main {
     public static void main(String[] args) {
-	    part2();
+	    part1();
     }
+    public static void addWordsIfDivides(Integer num, Integer divider, String addWord, ArrayList<String> CurrentString){
+    	if (num % divider == 0)
+    		CurrentString.add(addWord);
+	}
+	public static void printWordsOrNumber(ArrayList<String> output, Integer num){
+		if (output.isEmpty())
+			System.out.println(num);
+		else
+			System.out.println(String.join("", output));
+	}
     public static void part1(){
 		for(int i = 1 ; i<=100; i++){
-			if (i % 15 == 0){
-				System.out.println("FizzBuzz");
-			}
-			else if (i % 5 ==0){
-				System.out.println("Buzz");
-			}
-			else if (i % 3 == 0){
-				System.out.println("Fizz");
-			}
-			else System.out.println(i);
+			ArrayList<String> output = new ArrayList<String>();
+			addWordsIfDivides(i, 5, "Buzz", output);
+			addWordsIfDivides(i, 3, "Fizz", output);
+			printWordsOrNumber(output, i);
 		}
 	}
 
@@ -25,8 +30,13 @@ public class Main {
 			String output = "";
 			if (i % 3 ==0) output+="Buzz";
 			if (i % 5 == 0) output+= "Fizz";
+			if (i % 13 == 0) output += "Fezz";
 			if (i % 7 == 0) output+= "Bang";
-			if (i % 11 == 0) output = "Bong";
+			if (i % 11 == 0){
+				if (i % 13 != 0) output = "Bong";
+				if (i % 13 == 0) output = "FezzBong";
+			}
+
 			if (output =="")
 				System.out.println(i);
 			else
